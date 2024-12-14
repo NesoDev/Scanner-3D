@@ -1,0 +1,11 @@
+opencv-python>=4.8.0
+numpy>=1.24.0
+trimesh>=3.23.0
+flask>=2.0.0
+open3d>=0.17.0
+scipy>=1.10.0
+Flask-CORS==4.0.0
+requests>=2.31.0
+rembg>=2.0.50
+onnxruntime>=1.15.1
+Pillow>=10.0.0

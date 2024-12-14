@@ -1,0 +1,40 @@
+# Usa la imagen oficial de Python
+FROM python:3.10-slim
+
+# ------------------------
+# Instalación de dependencias del sistema
+# ------------------------
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libgomp1 \
+    libusb-1.0-0 \
+    libeigen3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# ------------------------
+# Configuración de la aplicación
+# ------------------------
+WORKDIR /app
+
+# Copia solo los archivos necesarios primero
+COPY requirements.txt .
+
+# Instalación de dependencias de Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia el resto de la aplicación
+COPY . .
+
+# Establece el PYTHONPATH para la aplicación
+ENV PYTHONPATH="/app/src"
+
+# ------------------------
+# Configuración del puerto
+# ------------------------
+EXPOSE 8000
+
+# ------------------------
+# Comando para ejecutar la aplicación
+# ------------------------
+CMD ["python3", "app.py"]
